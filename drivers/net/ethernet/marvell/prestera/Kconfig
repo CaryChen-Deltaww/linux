@@ -24,3 +24,13 @@ config PRESTERA_PCI
 
 	  To compile this driver as a module, choose M here: the
 	  module will be called prestera_pci.
+
+config PRESTERA_SHM
+        tristate "Shared Memory interface driver for Marvell Prestera Switch ASICs family"
+        depends on PRESTERA
+        help
+          This is implementation of Shared Memory interface support for Marvell Prestera
+          Switch ASICs family.
+
+          To compile this driver as a module, choose M here: the
+          module will be called prestera_shm.
