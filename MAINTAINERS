@@ -17268,6 +17268,14 @@ S:	Supported
 F:	Documentation/hwmon/sch5627.rst
 F:	drivers/hwmon/sch5627.c
 
+SMSC EMC2305 HARDWARE MONITOR DRIVER
+M: Reinhard Pfau <pfau@gdsys.de>
+L: lm-sensors@lm-sensors.org
+S: Maintained
+F: Documentation/hwmon/emc2305
+F: Documentation/devicetree/bindings/hwmon/emc2305.txt
+F: drivers/hwmon/emc2305.c
+
 SMSC UFX6000 and UFX7000 USB to VGA DRIVER
 M:	Steve Glendinning <steve.glendinning@shawell.net>
 L:	linux-fbdev@vger.kernel.org
