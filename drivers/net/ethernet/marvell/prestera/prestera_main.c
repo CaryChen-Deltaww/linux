@@ -629,6 +629,7 @@ static void prestera_link_validate(struct phylink_config *config,
 
 	if (state->interface != PHY_INTERFACE_MODE_NA &&
 	    state->interface != PHY_INTERFACE_MODE_10GBASER &&
+	    state->interface != PHY_INTERFACE_MODE_25GBASER &&
 	    state->interface != PHY_INTERFACE_MODE_SGMII &&
 	    !phy_interface_mode_is_8023z(state->interface)) {
 		bitmap_zero(supported, __ETHTOOL_LINK_MODE_MASK_NBITS);
@@ -636,8 +637,15 @@ static void prestera_link_validate(struct phylink_config *config,
 	}
 
 	switch (state->interface) {
-	case PHY_INTERFACE_MODE_10GBASER:
 	case PHY_INTERFACE_MODE_NA:
+	case PHY_INTERFACE_MODE_25GBASER:
+		phylink_set(mask, 25000baseCR_Full);
+		phylink_set(mask, 25000baseKR_Full);
+		phylink_set(mask, 25000baseSR_Full);
+		if (state->interface != PHY_INTERFACE_MODE_NA)
+			break;
+		fallthrough;
+	case PHY_INTERFACE_MODE_10GBASER:
 		phylink_set(mask, 10000baseT_Full);
 		phylink_set(mask, 10000baseCR_Full);
 		phylink_set(mask, 10000baseSR_Full);
@@ -734,6 +742,10 @@ static void prestera_mac_config(struct phylink_config *config,
 
 	/* See sfp_select_interface... fIt */
 	switch (state->interface) {
+	case PHY_INTERFACE_MODE_25GBASER:
+		cfg_mac.mode = PRESTERA_MAC_MODE_SR_LR;
+		cfg_mac.speed = SPEED_25000;
+		break;
 	case PHY_INTERFACE_MODE_10GBASER:
 		cfg_mac.mode = PRESTERA_MAC_MODE_SR_LR;
 		cfg_mac.speed = SPEED_10000;
