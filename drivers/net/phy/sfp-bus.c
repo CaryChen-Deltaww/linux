@@ -50,6 +50,18 @@ static void sfp_quirk_2500basex(const struct sfp_eeprom_id *id,
 	phylink_set(modes, 2500baseX_Full);
 }
 
+static void sfp_quirk_25gbasesr(const struct sfp_eeprom_id *id,
+				unsigned long *modes)
+{
+	phylink_set(modes, 25000baseSR_Full);
+}
+
+static void sfp_quirk_25gbasecr(const struct sfp_eeprom_id *id,
+				unsigned long *modes)
+{
+	phylink_set(modes, 25000baseCR_Full);
+}
+
 static void sfp_quirk_ubnt_uf_instant(const struct sfp_eeprom_id *id,
 				      unsigned long *modes)
 {
@@ -108,6 +120,14 @@ static const struct sfp_quirk sfp_quirks[] = {
 		.vendor = "FINISAR CORP.",
 		.part = "FTLX8574D3BCL",
 		.modes = sfp_quirk_1000basex,
+ 	}, {
+		.vendor = "DELTA",
+		.part = "SAOC-25G1F2A03",
+		.modes = sfp_quirk_25gbasesr,
+ 	}, {
+		.vendor = "JESS-LINK",
+		.part = "P4600UX01000-1",
+		.modes = sfp_quirk_25gbasecr,
  	}
 };
 
