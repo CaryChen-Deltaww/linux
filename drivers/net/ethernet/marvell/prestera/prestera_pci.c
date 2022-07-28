@@ -420,6 +420,8 @@ static int prestera_pci_probe(struct pci_dev *pdev,
 		}
 	}
 
+	pr_info("%s: mem_addr: %llx pp_addr: %llx\n", __func__, mem_addr, pp_addr);
+
 	pci_set_master(pdev);
 
 	fw = kzalloc(sizeof(*fw), GFP_KERNEL);
